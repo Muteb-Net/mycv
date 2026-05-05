@@ -7,10 +7,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #00d2ff;
-            --bg: #0b0f19;
-            --card: #161b22;
-            --text: #ffffff;
+            /* درجات الذهبي والفحم */
+            --gold: #d4af37; /* ذهبي ملكي */
+            --gold-light: #f1d592;
+            --bg: #050505; /* أسود عميق */
+            --card: #111111; /* فجمي فاتح */
+            --text: #e0e0e0;
         }
         body {
             font-family: 'Cairo', sans-serif;
@@ -22,20 +24,44 @@
             align-items: center;
             min-height: 100vh;
         }
+        /* توهج ذهبي خفيف في الخلفية */
+        body::before {
+            content: "";
+            position: absolute;
+            width: 400px;
+            height: 400px;
+            background: var(--gold);
+            filter: blur(180px);
+            opacity: 0.05;
+            z-index: -1;
+        }
         .container {
             width: 90%;
             max-width: 500px;
             background: var(--card);
             padding: 50px 30px;
-            border-radius: 30px;
+            border-radius: 20px;
             text-align: center;
-            border: 1px solid rgba(255,255,255,0.05);
+            border: 1px solid rgba(212, 175, 55, 0.2); /* إطار ذهبي نحيف */
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
         }
-        h1 { margin: 0; font-weight: 900; font-size: 2.2rem; }
-        .tagline { color: var(--primary); font-size: 1.1rem; margin-top: 10px; font-weight: 700; }
+        h1 { 
+            margin: 0; 
+            font-weight: 900; 
+            font-size: 2.2rem; 
+            color: var(--gold); /* الاسم بالذهبي */
+            letter-spacing: -1px;
+        }
+        .tagline { 
+            color: var(--gold-light); 
+            font-size: 1.1rem; 
+            margin-top: 10px; 
+            font-weight: 700;
+            opacity: 0.9;
+        }
         .bio { 
             line-height: 1.8; 
-            color: #8b949e; 
+            color: #b0b0b0; 
             margin: 30px 0; 
             font-size: 1rem; 
             text-align: justify;
@@ -43,25 +69,33 @@
         .skills-grid { 
             display: grid; 
             grid-template-columns: 1fr 1fr; 
-            gap: 10px; 
+            gap: 12px; 
             margin-bottom: 40px; 
         }
         .skill-card { 
-            background: rgba(255,255,255,0.02); 
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 10px; 
-            border-radius: 12px; 
+            background: rgba(212, 175, 55, 0.03); 
+            border: 1px solid rgba(212, 175, 55, 0.15);
+            padding: 12px; 
+            border-radius: 10px; 
             font-size: 0.85rem;
-            color: #cbd5e1;
+            color: var(--gold-light);
         }
         .linkedin-btn {
             display: block;
-            background: #fff;
+            background: linear-gradient(135deg, var(--gold) 0%, #b8860b 100%);
             color: #000;
             text-decoration: none;
             padding: 18px;
-            border-radius: 15px;
+            border-radius: 12px;
             font-weight: 900;
+            font-size: 1.1rem;
+            transition: 0.3s;
+            border: none;
+        }
+        .linkedin-btn:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 175, 55, 0.2);
+            filter: brightness(1.1);
         }
     </style>
 </head>
@@ -72,7 +106,7 @@
     <div class="tagline">مهتم بالأمن التقني وباحث في علوم الحاسب</div>
     
     <p class="bio">
-        لدي شغف عميق بعالم الحاسب والتقنية منذ وقت مبكر، حيث كانت لي تجارب سابقة في تعلم الأمن السيبراني واكتشاف الثغرات. تخصصي الدراسي الحالي هو "شبكات الحاسب"، وأمتلك مهارات قوية في البحث الذاتي وحل المشكلات التقنية المعقدة، مع اهتمام خاص بأنظمة التشغيل المفتوحة وتأمين البيانات.
+        لدي شغف عميق بعالم الحاسب والتقنية منذ وقت مبكر، حيث كانت لي تجارب سابقة في تعلم الأمن السيبراني واكتشاف الثغرات. تخصصي الدراسي الحالي هو "شبكات الحاسب"، وأمتلك مهارات قوية في البحث الذاتي وحل المشكلات التقنية المعقدة، مع اهتمام خاص بأنظمة التشغيل وتأمين البيانات.
     </p>
 
     <div class="skills-grid">
