@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUTEB | THE_ULTIMATE_INTERFACE</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;700;900&display=swap" rel="stylesheet">
+    <title>متعب العتيبي | الهوية الرقمية الفاخرة</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
         :root {
-            --cosmic-purple: #6e00ff;
-            --cosmic-blue: #00d2ff;
-            --cosmic-pink: #ff00ff;
-            --void-black: #020205;
+            --gold-accent: #d4af37;
+            --deep-black: #08080a;
+            --glass-bg: rgba(255, 255, 255, 0.02);
+            --neon-blue: #00f3ff;
         }
 
         * {
@@ -21,297 +21,240 @@
         }
 
         body {
-            background-color: var(--void-black);
+            background-color: var(--deep-black);
             color: #fff;
             font-family: 'Cairo', sans-serif;
             min-height: 100vh;
             overflow-x: hidden;
+            overflow-y: auto;
             display: flex;
             justify-content: center;
-            align-items: center;
-            perspective: 2000px;
+            align-items: flex-start;
+            padding: 80px 0;
         }
 
-        /* Animated Nebula Background */
-        #nebula-canvas {
+        /* Ambient Background Glows */
+        .ambient-glow {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            filter: blur(50px);
-            opacity: 0.6;
+            background: radial-gradient(circle at 10% 10%, rgba(0, 243, 255, 0.05) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
         }
 
-        /* Starfield */
-        .stars {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            z-index: -2;
-            background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
-        }
-
-        /* The Quantum Card */
-        .quantum-card {
+        /* Main Container */
+        .main-card {
             position: relative;
+            z-index: 10;
             width: 90%;
-            max-width: 900px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50px;
-            padding: 80px 50px;
-            transform-style: preserve-3d;
-            box-shadow: 0 0 100px rgba(110, 0, 255, 0.2);
-            overflow: hidden;
-            transition: transform 0.1s ease-out;
+            max-width: 800px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 30px;
+            padding: 60px;
+            box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
+            transition: transform 0.3s ease;
         }
 
-        .quantum-card::before {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: conic-gradient(from 0deg, transparent, var(--cosmic-purple), var(--cosmic-blue), transparent);
-            animation: rotateGlow 10s linear infinite;
-            z-index: -1;
-            opacity: 0.2;
-        }
-
-        @keyframes rotateGlow {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        /* Header Content */
+        /* Clean Header */
         .header {
             text-align: center;
-            margin-bottom: 60px;
-            transform: translateZ(50px);
-        }
-
-        .avatar-portal {
-            width: 180px;
-            height: 180px;
-            margin: 0 auto 30px;
-            position: relative;
-            border-radius: 50%;
-            background: linear-gradient(45deg, var(--cosmic-purple), var(--cosmic-blue));
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 0 50px var(--cosmic-purple);
-        }
-
-        .avatar-portal i {
-            font-size: 5rem;
-            color: #fff;
-            filter: drop-shadow(0 0 20px #fff);
+            margin-bottom: 50px;
         }
 
         h1 {
             font-size: 4rem;
             font-weight: 900;
-            background: linear-gradient(to right, #fff, var(--cosmic-blue));
+            letter-spacing: -1px;
+            background: linear-gradient(to bottom, #fff 40%, #888 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 10px;
         }
 
         .subtitle {
-            font-size: 1.4rem;
-            color: var(--cosmic-blue);
-            letter-spacing: 5px;
+            font-size: 1.3rem;
+            color: var(--neon-blue);
             font-weight: 300;
+            letter-spacing: 5px;
             text-transform: uppercase;
+            opacity: 0.8;
         }
 
-        /* Content Sections */
-        .content-box {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 30px;
-            padding: 40px;
-            margin-bottom: 40px;
-            transform: translateZ(30px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            line-height: 2;
+        /* Bio Box */
+        .bio-box {
+            background: rgba(255, 255, 255, 0.01);
+            border-right: 4px solid var(--neon-blue);
+            padding: 30px;
+            margin-bottom: 50px;
             font-size: 1.2rem;
-            text-align: center;
+            line-height: 2;
+            color: #ccc;
+            text-align: justify;
         }
 
-        /* Skills Mosaic */
-        .skills-mosaic {
+        /* Skills Section */
+        .section-label {
+            font-size: 0.9rem;
+            color: var(--neon-blue);
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 700;
+            letter-spacing: 3px;
+        }
+
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(to left, var(--neon-blue), transparent);
+        }
+
+        .skills-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             margin-bottom: 60px;
-            transform: translateZ(40px);
         }
 
-        .mosaic-item {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+        .skill-item {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
             padding: 25px;
-            border-radius: 20px;
-            text-align: center;
-            transition: 0.5s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .mosaic-item:hover {
-            background: rgba(110, 0, 255, 0.2);
-            border-color: var(--cosmic-blue);
-            transform: translateY(-10px) scale(1.05);
-        }
-
-        .mosaic-item i {
-            font-size: 1.5rem;
-            margin-bottom: 15px;
-            color: var(--cosmic-blue);
-        }
-
-        .mosaic-item span {
-            display: block;
-            font-weight: 700;
-            font-size: 0.95rem;
-        }
-
-        /* Ultimate Button */
-        .btn-ultimate {
-            display: inline-flex;
+            border-radius: 15px;
+            display: flex;
             align-items: center;
             gap: 20px;
+            transition: all 0.4s ease;
+        }
+
+        .skill-item:hover {
+            background: rgba(0, 243, 255, 0.05);
+            border-color: var(--neon-blue);
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            color: var(--neon-blue);
+            font-size: 1.5rem;
+            opacity: 0.8;
+        }
+
+        .skill-text {
+            font-weight: 600;
+            font-size: 1.1rem;
+            color: #eee;
+        }
+
+        /* Contact Button */
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .btn-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
             background: #fff;
             color: #000;
-            padding: 20px 60px;
+            padding: 20px 50px;
             border-radius: 100px;
             text-decoration: none;
             font-weight: 900;
             font-size: 1.2rem;
-            transition: 0.4s;
-            box-shadow: 0 0 40px rgba(255, 255, 255, 0.3);
-            transform: translateZ(60px);
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
         }
 
-        .btn-ultimate:hover {
-            transform: translateZ(80px) scale(1.1);
-            background: var(--cosmic-blue);
-            color: #fff;
-            box-shadow: 0 0 60px var(--cosmic-blue);
+        .btn-link:hover {
+            transform: scale(1.05);
+            background: var(--neon-blue);
+            color: #000;
+            box-shadow: 0 15px 40px rgba(0, 243, 255, 0.3);
         }
 
-        /* Responsive */
+        .copyright {
+            margin-top: 40px;
+            font-size: 0.8rem;
+            color: #555;
+            letter-spacing: 1px;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar { width: 5px; }
+        ::-webkit-scrollbar-track { background: var(--deep-black); }
+        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
+
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .skills-mosaic { grid-template-columns: 1fr; }
-            .quantum-card { padding: 50px 25px; }
+            .main-card { padding: 40px 25px; }
+            .skills-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-    <div class="stars"></div>
-    <canvas id="nebula-canvas"></canvas>
+    <div class="ambient-glow"></div>
 
-    <div class="quantum-card" id="card">
+    <div class="main-card" id="card">
         <div class="header">
-            <div class="avatar-portal">
-                <i class="fas fa-atom"></i>
-            </div>
             <h1>متعب العتيبي</h1>
             <div class="subtitle">محب للتقنية & باحث</div>
         </div>
 
-        <div class="content-box">
+        <div class="bio-box">
             شغوف بعالم التقنية منذ البداية، متخصص في شبكات الحاسب مع اهتمام عميق باكتشاف الثغرات وتأمين البيانات. أتميز بمهارات البحث وحل المشكلات التقنية.
         </div>
 
-        <div class="skills-mosaic">
-            <div class="mosaic-item">
-                <i class="fas fa-eye"></i>
-                <span>اكتشاف الثغرات</span>
+        <div class="section-label">المهارات التقنية</div>
+        
+        <div class="skills-grid">
+            <div class="skill-item">
+                <i class="fas fa-search skill-icon"></i>
+                <span class="skill-text">اكتشاف الثغرات</span>
             </div>
-            <div class="mosaic-item">
-                <i class="fas fa-bolt"></i>
-                <span>حل المشكلات</span>
+            <div class="skill-item">
+                <i class="fas fa-wrench skill-icon"></i>
+                <span class="skill-text">حل وإصلاح المشكلات</span>
             </div>
-            <div class="mosaic-item">
-                <i class="fas fa-microchip"></i>
-                <span>التعامل مع الأنظمة</span>
+            <div class="skill-item">
+                <i class="fas fa-microchip skill-icon"></i>
+                <span class="skill-text">التعامل مع الأنظمة</span>
             </div>
-            <div class="mosaic-item">
-                <i class="fas fa-user-shield"></i>
-                <span>حماية البيانات</span>
+            <div class="skill-item">
+                <i class="fas fa-user-shield skill-icon"></i>
+                <span class="skill-text">أساسيات حماية البيانات</span>
             </div>
-            <div class="mosaic-item">
-                <i class="fas fa-network-wired"></i>
-                <span>أساسيات الشبكات</span>
+            <div class="skill-item">
+                <i class="fas fa-network-wired skill-icon"></i>
+                <span class="skill-text">أساسيات الشبكات</span>
             </div>
-            <div class="mosaic-item">
-                <i class="fas fa-infinity"></i>
-                <span>البحث والتعلم الذاتي</span>
+            <div class="skill-item">
+                <i class="fas fa-book-open skill-icon"></i>
+                <span class="skill-text">البحث والتعلم الذاتي</span>
             </div>
         </div>
 
-        <div style="text-align: center;">
-            <a href="https://www.linkedin.com/in/muteb-al-otaibi-9641853bb" target="_blank" class="btn-ultimate">
+        <div class="footer">
+            <a href="https://www.linkedin.com/in/muteb-al-otaibi-9641853bb" target="_blank" class="btn-link">
                 <span>تواصل معي عبر LinkedIn</span>
                 <i class="fas fa-arrow-left"></i>
             </a>
+            <div class="copyright">© 2026 متعب العتيبي | التميز في بساطة التصميم</div>
         </div>
     </div>
 
     <script>
-        // Nebula Background Animation
-        const canvas = document.getElementById('nebula-canvas');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        let colors = ['#6e00ff', '#00d2ff', '#ff00ff'];
-        let particles = [];
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.radius = Math.random() * 100 + 50;
-                this.color = colors[Math.floor(Math.random() * colors.length)];
-                this.velocity = { x: (Math.random() - 0.5) * 2, y: (Math.random() - 0.5) * 2 };
-            }
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
-            }
-            update() {
-                this.x += this.velocity.x;
-                this.y += this.velocity.y;
-                if (this.x < 0 || this.x > canvas.width) this.velocity.x *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.velocity.y *= -1;
-                this.draw();
-            }
-        }
-
-        for (let i = 0; i < 15; i++) particles.push(new Particle());
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => p.update());
-            requestAnimationFrame(animate);
-        }
-        animate();
-
-        // 3D Card Tilt Effect
+        // Subtle tilt effect
         const card = document.getElementById('card');
         document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 30;
-            const y = (window.innerHeight / 2 - e.pageY) / 30;
+            const x = (window.innerWidth / 2 - e.pageX) / 50;
+            const y = (window.innerHeight / 2 - e.pageY) / 50;
             card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-        });
-
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
         });
     </script>
 </body>
