@@ -3,347 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متعب العتيبي | المنشور الذهبي</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <title>MUTEB_OS | INITIALIZING...</title>
+    <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cairo:wght@400;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            background: linear-gradient(135deg, #0f0f1e 0%, #1a1a2e 50%, #0f0f1e 100%);
-            color: #fff;
-            font-family: 'Cairo', sans-serif;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start; /* Changed to allow scrolling from top */
-            overflow-x: hidden;
-            overflow-y: auto; /* Enabled scrolling */
-            position: relative;
+        :root {
+            --neon-cyan: #00f3ff;
+            --neon-purple: #bc13fe;
+            --dark-void: #020205;
+            --matrix-green: #00ff41;
         }
 
-        /* Glow Background */
-        .glow-bg {
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            cursor: crosshair;
+        }
+
+        body {
+            background-color: var(--dark-void);
+            color: var(--neon-cyan);
+            font-family: 'Share Tech Mono', 'Cairo', monospace;
+            overflow: hidden;
+            height: 100vh;
+            perspective: 1000px;
+        }
+
+        /* Canvas Background for Particles */
+        #canvas {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
+            z-index: 0;
+        }
+
+        /* Scanline Effect */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 100;
+            background-size: 100% 2px, 3px 100%;
             pointer-events: none;
         }
 
-        .glow-orb {
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.3;
-        }
-
-        .glow-orb-1 {
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, #d4af37, transparent);
-            top: -100px;
-            left: -100px;
-            animation: float1 20s ease-in-out infinite;
-        }
-
-        .glow-orb-2 {
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, #f1d592, transparent);
-            bottom: -50px;
-            right: -50px;
-            animation: float2 25s ease-in-out infinite;
-        }
-
-        @keyframes float1 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(50px, 50px); } }
-        @keyframes float2 { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-50px, -50px); } }
-
-        .container {
+        /* Main Interface */
+        .interface {
             position: relative;
             z-index: 10;
-            max-width: 750px;
-            width: 95%;
-            perspective: 1000px;
-            margin: 50px 0; /* Added margin for scrolling space */
-        }
-
-        .card-wrapper {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(30px);
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 25px;
-            padding: 80px 50px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-            transform-style: preserve-3d;
-            transition: transform 0.1s ease-out;
-            animation: slideIn 1s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .avatar-ring {
-            width: 140px;
-            height: 140px;
-            margin: 0 auto 30px;
-            position: relative;
             display: flex;
+            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            align-items: center;
+            height: 100vh;
+            padding: 20px;
         }
 
-        .avatar-ring::before {
-            content: '';
+        .terminal-window {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(0, 20, 30, 0.7);
+            border: 1px solid var(--neon-cyan);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.2);
+            padding: 30px;
+            position: relative;
+            backdrop-filter: blur(10px);
+            clip-path: polygon(0 0, 95% 0, 100% 5%, 100% 100%, 5% 100%, 0 95%);
+        }
+
+        .system-status {
             position: absolute;
-            width: 140px;
-            height: 140px;
-            border: 2px solid rgba(212, 175, 55, 0.4);
-            border-radius: 50%;
-            animation: spin 20s linear infinite;
+            top: 10px;
+            right: 20px;
+            font-size: 0.7rem;
+            color: var(--neon-purple);
+            animation: blink 1s infinite;
         }
 
-        .avatar-ring::after {
-            content: '';
-            position: absolute;
-            width: 130px;
-            height: 130px;
-            border: 1px solid rgba(212, 175, 55, 0.2);
-            border-radius: 50%;
-            animation: spin 30s linear infinite reverse;
-        }
+        @keyframes blink { 50% { opacity: 0; } }
 
-        @keyframes spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .avatar-icon {
-            font-size: 4rem;
-            z-index: 2;
-        }
-
-        h1 {
-            font-size: 3.5rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #d4af37 0%, #f1d592 50%, #d4af37 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
-        }
-
-        .subtitle {
-            font-size: 1.4rem;
-            color: #d4af37;
-            font-weight: 300;
-            letter-spacing: 2px;
-            margin-bottom: 40px;
-        }
-
-        .divider {
-            width: 80px;
-            height: 3px;
-            background: linear-gradient(90deg, transparent, #d4af37, transparent);
-            margin: 0 auto 40px;
-        }
-
-        .bio-section {
-            text-align: center;
-            margin-bottom: 50px;
-        }
-
-        .bio-text {
-            font-size: 1.1rem;
-            line-height: 1.9;
-            color: #d0d0d0;
-            font-weight: 300;
-        }
-
-        .bio-text strong {
-            color: #d4af37;
-            font-weight: 600;
-        }
-
-        .skills-section {
-            margin-bottom: 50px;
-        }
-
-        .section-label {
-            font-size: 0.85rem;
+        .glitch-title {
+            font-size: 3rem;
+            font-weight: bold;
             text-transform: uppercase;
-            color: #d4af37;
-            letter-spacing: 3px;
-            margin-bottom: 25px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            position: relative;
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #fff;
+            text-shadow: 2px 2px var(--neon-purple);
         }
 
-        .section-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: linear-gradient(to left, rgba(212, 175, 55, 0.2), transparent);
+        .glitch-title::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 2px;
+            text-shadow: -2px 0 red;
+            top: 0;
+            color: white;
+            background: var(--dark-void);
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim 2s infinite linear alternate-reverse;
         }
 
-        .skills-grid {
+        @keyframes noise-anim {
+            0% { clip: rect(10px, 9999px, 50px, 0); }
+            20% { clip: rect(80px, 9999px, 100px, 0); }
+            40% { clip: rect(30px, 9999px, 60px, 0); }
+            100% { clip: rect(90px, 9999px, 120px, 0); }
+        }
+
+        .decrypt-text {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            color: var(--neon-cyan);
+            min-height: 1.5em;
+        }
+
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 15px;
+            margin-top: 20px;
         }
 
-        .skill-item {
-            background: rgba(212, 175, 55, 0.05);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 1rem;
-            color: #d4af37;
-            font-weight: 500;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
+        .stat-item {
+            border: 1px solid rgba(0, 243, 255, 0.3);
+            padding: 10px;
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            background: rgba(0, 243, 255, 0.05);
         }
 
-        .skill-item:hover {
-            background: rgba(212, 175, 55, 0.15);
-            border-color: #d4af37;
-            transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(212, 175, 55, 0.2);
+        .stat-label { color: var(--neon-purple); }
+
+        .hex-bg {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            opacity: 0.05;
+            background-image: radial-gradient(var(--neon-cyan) 1px, transparent 1px);
+            background-size: 20px 20px;
+            z-index: -1;
         }
 
-        .cta-section {
-            text-align: center;
-            margin-top: 50px;
-        }
-
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #d4af37 0%, #f1d592 100%);
-            color: #0f0f1e;
-            padding: 18px 50px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 1.1rem;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            box-shadow: 0 10px 30px rgba(212, 175, 55, 0.3);
-            border: none;
-            cursor: pointer;
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 20px 50px rgba(212, 175, 55, 0.5);
-            filter: brightness(1.1);
-        }
-
-        .footer-text {
+        .action-button {
             margin-top: 40px;
-            text-align: center;
-            font-size: 0.8rem;
-            color: #888;
-            font-weight: 300;
+            padding: 15px 40px;
+            background: transparent;
+            border: 1px solid var(--neon-cyan);
+            color: var(--neon-cyan);
+            font-family: 'Share Tech Mono', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 5px;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
         }
+
+        .action-button:hover {
+            background: var(--neon-cyan);
+            color: var(--dark-void);
+            box-shadow: 0 0 30px var(--neon-cyan);
+        }
+
+        .loader {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: #000;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            transition: 1s;
+        }
+
+        .loader.hidden { opacity: 0; pointer-events: none; }
+
+        #radar {
+            width: 150px;
+            height: 150px;
+            border: 2px solid var(--neon-cyan);
+            border-radius: 50%;
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        #radar::after {
+            content: "";
+            position: absolute;
+            top: 50%; left: 50%;
+            width: 50%; height: 2px;
+            background: var(--neon-cyan);
+            transform-origin: left;
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
         @media (max-width: 600px) {
-            .card-wrapper { padding: 40px 25px; }
-            h1 { font-size: 2.2rem; }
-            .subtitle { font-size: 1rem; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .cta-button { padding: 15px 35px; font-size: 1rem; }
+            .glitch-title { font-size: 1.8rem; }
+            .stats-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
 
-<!-- Glow Background -->
-<div class="glow-bg">
-    <div class="glow-orb glow-orb-1"></div>
-    <div class="glow-orb glow-orb-2"></div>
-</div>
+    <div class="loader" id="loader">
+        <div id="radar"></div>
+        <div id="loading-text">ACCESSING SECURE SERVER...</div>
+    </div>
 
-<!-- Main Container -->
-<div class="container">
-    <div class="card-wrapper" id="cardWrapper">
-        <div class="header">
-            <div class="avatar-ring">
-                <div class="avatar-icon">✨</div>
+    <canvas id="canvas"></canvas>
+    
+    <div class="interface">
+        <div class="terminal-window">
+            <div class="system-status">● SYSTEM: ACTIVE</div>
+            <div class="hex-bg"></div>
+            
+            <h1 class="glitch-title" data-text="متعب العتيبي">متعب العتيبي</h1>
+            
+            <div class="decrypt-text" id="bio">
+                INITIALIZING BIO_DATA...
             </div>
-            <h1>متعب العتيبي</h1>
-            <div class="subtitle">محب للتقنية & باحث</div>
-            <div class="divider"></div>
-        </div>
 
-        <div class="bio-section">
-            <p class="bio-text">
-                شغوف بعالم التقنية منذ البداية، متخصص في <strong>شبكات الحاسب</strong> مع اهتمام عميق باكتشاف الثغرات وتأمين البيانات. أتميز بمهارات البحث وحل المشكلات التقنية.
-            </p>
-        </div>
-
-        <div class="skills-section">
-            <div class="section-label">المهارات التقنية</div>
-            <div class="skills-grid">
-                <div class="skill-item">🔍 اكتشاف الثغرات</div>
-                <div class="skill-item">🛠️ حل وإصلاح المشكلات</div>
-                <div class="skill-item">⚙️ التعامل مع الأنظمة</div>
-                <div class="skill-item">🔐 أساسيات حماية البيانات</div>
-                <div class="skill-item">🌐 أساسيات الشبكات</div>
-                <div class="skill-item">📖 البحث والتعلم الذاتي</div>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-label">[ROLE]</span>
+                    <span>TECH_RESEARCHER</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">[SKILL_01]</span>
+                    <span>VULN_DISCOVERY</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">[SKILL_02]</span>
+                    <span>SYS_ARCHITECT</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">[SKILL_03]</span>
+                    <span>NET_ENGINEER</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">[STATUS]</span>
+                    <span style="color: var(--matrix-green);">ENCRYPTED</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">[LOC]</span>
+                    <span>SAUDI_ARABIA</span>
+                </div>
             </div>
-        </div>
 
-        <div class="cta-section">
-            <button class="cta-button" onclick="window.open('https://www.linkedin.com/in/muteb-al-otaibi-9641853bb', '_blank')">
-                <span>→</span>
-                <span>تواصل معي</span>
+            <button class="action-button" onclick="window.open('https://www.linkedin.com/in/muteb-al-otaibi-9641853bb', '_blank')">
+                ESTABLISH_CONNECTION
             </button>
-            <div class="footer-text">© 2026 متعب العتيبي | صُنع بشغف للتميز التقني</div>
         </div>
     </div>
-</div>
 
-<script>
-    // 3D Tilt Effect on Mouse Move
-    const cardWrapper = document.getElementById('cardWrapper');
-    
-    document.addEventListener('mousemove', (e) => {
-        const rect = cardWrapper.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        
-        const rotateX = (e.clientY - centerY) / 10;
-        const rotateY = (centerX - e.clientX) / 10;
-        
-        cardWrapper.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-    });
+    <script>
+        // Particle Background
+        const canvas = document.getElementById('canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
 
-    document.addEventListener('mouseleave', () => {
-        cardWrapper.style.transform = 'rotateX(0) rotateY(0)';
-    });
+        let particles = [];
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+                if (this.x > canvas.width) this.x = 0;
+                if (this.x < 0) this.x = canvas.width;
+                if (this.y > canvas.height) this.y = 0;
+                if (this.y < 0) this.y = canvas.height;
+            }
+            draw() {
+                ctx.fillStyle = '#00f3ff';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+            }
+        }
 
-    // Smooth scroll behavior
-    document.documentElement.style.scrollBehavior = 'smooth';
-</script>
+        function init() {
+            for (let i = 0; i < 100; i++) particles.push(new Particle());
+        }
 
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.update();
+                p.draw();
+            });
+            requestAnimationFrame(animate);
+        }
+        init();
+        animate();
+
+        // Decrypt Effect
+        const originalText = "شغوف بعالم التقنية، متخصص في شبكات الحاسب مع اهتمام عميق باكتشاف الثغرات وتأمين البيانات. أتميز بمهارات البحث وحل المشكلات التقنية.";
+        const bioElement = document.getElementById('bio');
+        let iteration = 0;
+
+        function decrypt() {
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
+            const interval = setInterval(() => {
+                bioElement.innerText = originalText
+                    .split("")
+                    .map((letter, index) => {
+                        if (index < iteration) return originalText[index];
+                        return letters[Math.floor(Math.random() * 40)];
+                    })
+                    .join("");
+
+                if (iteration >= originalText.length) clearInterval(interval);
+                iteration += 1 / 3;
+            }, 30);
+        }
+
+        // Loader
+        window.onload = () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+                setTimeout(decrypt, 500);
+            }, 2000);
+        };
+
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
+    </script>
 </body>
 </html>
