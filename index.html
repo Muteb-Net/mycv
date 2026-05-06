@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MUTEB_VIRTUAL_IDENTITY | v2.0</title>
+    <title>متعب العتيبي | الهوية الرقمية</title>
     <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
@@ -11,7 +11,6 @@
             --neon-cyan: #00f3ff;
             --neon-red: #ff003c;
             --dark-void: #010103;
-            --grid-color: rgba(0, 243, 255, 0.05);
         }
 
         * {
@@ -25,22 +24,25 @@
             background-color: var(--dark-void);
             color: var(--neon-cyan);
             font-family: 'Cairo', 'Share Tech Mono', monospace;
-            overflow: hidden;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
+            overflow-x: hidden;
+            overflow-y: auto; /* Enabled scrolling */
+            padding: 50px 0;
         }
 
-        /* Matrix Rain Background */
+        /* Matrix Rain Background - Fixed */
         #matrix-canvas {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: 0;
             opacity: 0.15;
+            pointer-events: none;
         }
 
-        /* CRT Scanline Effect */
+        /* CRT Scanline Effect - Fixed */
         .scanlines {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
@@ -56,25 +58,20 @@
             z-index: 10;
             width: 90%;
             max-width: 850px;
-            padding: 40px;
-            background: rgba(0, 10, 15, 0.85);
+            padding: 60px 40px;
+            background: rgba(0, 10, 15, 0.9);
             border: 1px solid var(--neon-cyan);
             box-shadow: 0 0 30px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0, 243, 255, 0.05);
             backdrop-filter: blur(15px);
             clip-path: polygon(0 20px, 20px 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%);
-            animation: frameEntrance 1s cubic-bezier(0.2, 0.8, 0.2, 1);
-        }
-
-        @keyframes frameEntrance {
-            from { opacity: 0; transform: scale(0.9) translateY(20px); }
-            to { opacity: 1; transform: scale(1) translateY(0); }
+            margin-bottom: 50px;
         }
 
         /* Corner Accents */
         .corner {
             position: absolute;
-            width: 30px;
-            height: 30px;
+            width: 40px;
+            height: 40px;
             border: 2px solid var(--neon-red);
         }
         .top-left { top: -5px; left: -5px; border-right: none; border-bottom: none; }
@@ -83,16 +80,16 @@
         /* Header Section */
         .header {
             text-align: center;
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             position: relative;
         }
 
         .system-id {
             position: absolute;
-            top: -20px;
+            top: -30px;
             left: 0;
             font-family: 'Share Tech Mono';
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             color: var(--neon-red);
             letter-spacing: 2px;
         }
@@ -102,38 +99,39 @@
             font-weight: 900;
             color: #fff;
             text-shadow: 0 0 15px var(--neon-cyan);
-            margin-bottom: 5px;
-            position: relative;
+            margin-bottom: 10px;
         }
 
         .tagline {
-            font-size: 1.1rem;
-            letter-spacing: 5px;
+            font-size: 1.2rem;
+            letter-spacing: 4px;
             color: var(--neon-cyan);
-            opacity: 0.8;
-            text-transform: uppercase;
+            opacity: 0.9;
+            font-weight: 400;
         }
 
         /* Bio Box */
         .bio-section {
             background: rgba(0, 243, 255, 0.03);
-            border-right: 3px solid var(--neon-red);
-            padding: 20px;
-            margin-bottom: 40px;
-            font-size: 1.1rem;
-            line-height: 1.8;
+            border-right: 4px solid var(--neon-red);
+            padding: 30px;
+            margin-bottom: 50px;
+            font-size: 1.15rem;
+            line-height: 1.9;
             color: #d0faff;
+            text-align: justify;
         }
 
         /* Skills Grid */
         .section-label {
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             color: var(--neon-red);
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: bold;
+            gap: 15px;
+            font-weight: 900;
+            letter-spacing: 2px;
         }
 
         .section-label::after {
@@ -145,36 +143,36 @@
 
         .skills-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 50px;
         }
 
         .skill-box {
-            border: 1px solid rgba(0, 243, 255, 0.2);
-            padding: 15px;
+            border: 1px solid rgba(0, 243, 255, 0.15);
+            padding: 20px;
             display: flex;
             align-items: center;
-            gap: 15px;
-            transition: 0.3s;
+            gap: 20px;
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             background: rgba(0, 243, 255, 0.02);
         }
 
         .skill-box:hover {
             border-color: var(--neon-cyan);
-            background: rgba(0, 243, 255, 0.1);
-            transform: translateX(-5px);
-            box-shadow: -5px 0 15px rgba(0, 243, 255, 0.2);
+            background: rgba(0, 243, 255, 0.12);
+            transform: translateX(-10px);
+            box-shadow: -8px 0 20px rgba(0, 243, 255, 0.2);
         }
 
         .skill-icon {
             color: var(--neon-red);
-            font-size: 1.2rem;
+            font-size: 1.4rem;
         }
 
         .skill-text {
             font-weight: 700;
-            font-size: 1rem;
+            font-size: 1.05rem;
         }
 
         /* Action Area */
@@ -182,11 +180,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-top: 30px;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(0, 243, 255, 0.1);
         }
 
         .btn-cyber {
-            padding: 15px 40px;
+            padding: 18px 45px;
             background: transparent;
             border: 1px solid var(--neon-cyan);
             color: var(--neon-cyan);
@@ -196,53 +196,37 @@
             overflow: hidden;
             transition: 0.3s;
             clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%);
+            font-size: 1.1rem;
         }
 
         .btn-cyber:hover {
             background: var(--neon-cyan);
             color: var(--dark-void);
             box-shadow: 0 0 30px var(--neon-cyan);
+            transform: scale(1.05);
         }
 
         .status-bar {
             font-family: 'Share Tech Mono';
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--neon-red);
+            line-height: 1.5;
         }
 
-        /* Loading Overlay */
-        #boot-loader {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: #000;
-            z-index: 1000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: 0.8s;
-        }
-
-        .boot-text {
-            font-family: 'Share Tech Mono';
-            color: var(--neon-cyan);
-            margin-top: 20px;
-        }
+        /* Scrollbar Styling */
+        ::-webkit-scrollbar { width: 6px; }
+        ::-webkit-scrollbar-track { background: var(--dark-void); }
+        ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 10px; }
 
         @media (max-width: 600px) {
-            .glitch-name { font-size: 2.2rem; }
-            .skills-grid { grid-template-columns: 1fr; }
-            .cyber-frame { padding: 25px; }
-            .actions { flex-direction: column; gap: 20px; }
+            .glitch-name { font-size: 2.5rem; }
+            .cyber-frame { padding: 40px 20px; }
+            .actions { flex-direction: column; gap: 30px; text-align: center; }
+            .system-id { position: static; margin-bottom: 10px; }
         }
     </style>
 </head>
 <body>
-
-    <div id="boot-loader">
-        <div style="width: 50px; height: 50px; border: 3px solid var(--neon-cyan); border-top-color: transparent; border-radius: 50%; animation: spin 1s linear infinite;"></div>
-        <div class="boot-text" id="boot-msg">INITIALIZING_SECURE_PROTOCOLS...</div>
-    </div>
 
     <div class="scanlines"></div>
     <canvas id="matrix-canvas"></canvas>
@@ -252,24 +236,24 @@
         <div class="corner bottom-right"></div>
 
         <div class="header">
-            <div class="system-id">USR_ID: MUTEB_ALOTAIBI_01</div>
+            <div class="system-id">USER_PROFILE_AUTHENTICATED</div>
             <h1 class="glitch-name">متعب العتيبي</h1>
             <div class="tagline">محب للتقنية & باحث</div>
         </div>
 
         <div class="bio-section" id="bio-text">
-            جاري تحميل البيانات الحيوية...
+            شغوف بعالم التقنية منذ البداية، متخصص في شبكات الحاسب مع اهتمام عميق باكتشاف الثغرات وتأمين البيانات. أتميز بمهارات البحث وحل المشكلات التقنية.
         </div>
 
-        <div class="section-label">القدرات الهجومية والدفاعية</div>
+        <div class="section-label">المهارات التقنية</div>
         
         <div class="skills-grid">
             <div class="skill-box">
-                <i class="fas fa-user-secret skill-icon"></i>
+                <i class="fas fa-search skill-icon"></i>
                 <span class="skill-text">اكتشاف الثغرات</span>
             </div>
             <div class="skill-box">
-                <i class="fas fa-tools skill-icon"></i>
+                <i class="fas fa-wrench skill-icon"></i>
                 <span class="skill-text">حل وإصلاح المشكلات</span>
             </div>
             <div class="skill-box">
@@ -277,7 +261,7 @@
                 <span class="skill-text">التعامل مع الأنظمة</span>
             </div>
             <div class="skill-box">
-                <i class="fas fa-shield-halved skill-icon"></i>
+                <i class="fas fa-user-shield skill-icon"></i>
                 <span class="skill-text">أساسيات حماية البيانات</span>
             </div>
             <div class="skill-box">
@@ -285,30 +269,35 @@
                 <span class="skill-text">أساسيات الشبكات</span>
             </div>
             <div class="skill-box">
-                <i class="fas fa-terminal skill-icon"></i>
+                <i class="fas fa-book-open skill-icon"></i>
                 <span class="skill-text">البحث والتعلم الذاتي</span>
             </div>
         </div>
 
         <div class="actions">
             <div class="status-bar">
-                CONNECTION: <span id="ping">SECURE</span><br>
-                ENCRYPTION: AES-256
+                STATUS: ONLINE<br>
+                SECURITY: VERIFIED
             </div>
             <a href="https://www.linkedin.com/in/muteb-al-otaibi-9641853bb" target="_blank" class="btn-cyber">
-                تأسيس اتصال آمن
+                تواصل معي عبر LinkedIn
             </a>
         </div>
     </div>
 
     <script>
-        // Matrix Rain
+        // Matrix Rain Background
         const canvas = document.getElementById('matrix-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
+        
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
 
-        const chars = "0101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101010101";
+        const chars = "01010101";
         const fontSize = 14;
         const columns = canvas.width / fontSize;
         const drops = [];
@@ -328,46 +317,19 @@
         }
         setInterval(drawMatrix, 50);
 
-        // Bio Decrypt Effect
-        const originalBio = "شغوف بعالم التقنية منذ البداية، متخصص في شبكات الحاسب مع اهتمام عميق باكتشاف الثغرات وتأمين البيانات. أتميز بمهارات البحث وحل المشكلات التقنية.";
-        function decryptBio() {
-            let iteration = 0;
-            const bioElement = document.getElementById('bio-text');
-            const interval = setInterval(() => {
-                bioElement.innerText = originalBio.split("").map((letter, index) => {
-                    if (index < iteration) return originalBio[index];
-                    return "X#$%"[Math.floor(Math.random() * 4)];
-                }).join("");
-                if (iteration >= originalBio.length) clearInterval(interval);
-                iteration += 1;
-            }, 30);
+        // Smooth reveal of bio text
+        const bio = document.getElementById('bio-text');
+        const text = bio.innerText;
+        bio.innerText = '';
+        let i = 0;
+        function typeWriter() {
+            if (i < text.length) {
+                bio.innerHTML += text.charAt(i);
+                i++;
+                setTimeout(typeWriter, 20);
+            }
         }
-
-        // Boot Sequence
-        window.onload = () => {
-            const bootMsgs = ["LOADING_CORE...", "VERIFYING_ENCRYPTION...", "ACCESS_GRANTED"];
-            let msgIdx = 0;
-            const msgInterval = setInterval(() => {
-                document.getElementById('boot-msg').innerText = bootMsgs[msgIdx];
-                msgIdx++;
-                if (msgIdx >= bootMsgs.length) {
-                    clearInterval(msgInterval);
-                    setTimeout(() => {
-                        document.getElementById('boot-loader').style.opacity = '0';
-                        setTimeout(() => {
-                            document.getElementById('boot-loader').style.display = 'none';
-                            decryptBio();
-                        }, 800);
-                    }, 500);
-                }
-            }, 600);
-        };
-
-        // Ping variation
-        setInterval(() => {
-            const pings = ["SECURE", "STABLE", "ENCRYPTED"];
-            document.getElementById('ping').innerText = pings[Math.floor(Math.random() * pings.length)];
-        }, 3000);
+        window.onload = typeWriter;
     </script>
 </body>
 </html>
