@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>متعب العتيبي | الهوية الرقمية الفاخرة</title>
+    <title>متعب العتيبي | الهوية الرقمية النهائية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
     <style>
@@ -38,11 +38,11 @@
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             z-index: -1;
-            background: radial-gradient(circle at 10% 10%, rgba(0, 243, 255, 0.05) 0%, transparent 50%),
-                        radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.05) 0%, transparent 50%);
+            background: radial-gradient(circle at 10% 10%, rgba(0, 243, 255, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 90% 90%, rgba(212, 175, 55, 0.03) 0%, transparent 50%);
         }
 
-        /* Main Container */
+        /* Main Container - Fixed Position */
         .main-card {
             position: relative;
             z-index: 10;
@@ -54,7 +54,7 @@
             border-radius: 30px;
             padding: 60px;
             box-shadow: 0 40px 100px rgba(0, 0, 0, 0.8);
-            transition: transform 0.3s ease;
+            /* No movement transform */
         }
 
         /* Clean Header */
@@ -128,13 +128,12 @@
             display: flex;
             align-items: center;
             gap: 20px;
-            transition: all 0.4s ease;
+            transition: all 0.3s ease;
         }
 
         .skill-item:hover {
             background: rgba(0, 243, 255, 0.05);
             border-color: var(--neon-blue);
-            transform: translateY(-5px);
         }
 
         .skill-icon {
@@ -149,32 +148,58 @@
             color: #eee;
         }
 
-        /* Contact Button */
+        /* Action Buttons */
         .footer {
             text-align: center;
             margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
         }
 
         .btn-link {
             display: inline-flex;
             align-items: center;
-            gap: 15px;
-            background: #fff;
-            color: #000;
-            padding: 20px 50px;
+            gap: 12px;
+            padding: 18px 35px;
             border-radius: 100px;
             text-decoration: none;
-            font-weight: 900;
-            font-size: 1.2rem;
+            font-weight: 800;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
+        }
+
+        .btn-linkedin {
+            background: #fff;
+            color: #000;
             box-shadow: 0 10px 30px rgba(255, 255, 255, 0.1);
         }
 
-        .btn-link:hover {
-            transform: scale(1.05);
+        .btn-linkedin:hover {
             background: var(--neon-blue);
-            color: #000;
             box-shadow: 0 15px 40px rgba(0, 243, 255, 0.3);
+            transform: translateY(-3px);
+        }
+
+        .btn-cv {
+            background: transparent;
+            color: var(--neon-blue);
+            border: 2px solid var(--neon-blue);
+            box-shadow: 0 0 20px rgba(0, 243, 255, 0.1);
+        }
+
+        .btn-cv:hover {
+            background: rgba(0, 243, 255, 0.1);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.2);
+            transform: translateY(-3px);
         }
 
         .copyright {
@@ -184,15 +209,12 @@
             letter-spacing: 1px;
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; }
-        ::-webkit-scrollbar-track { background: var(--deep-black); }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-
         @media (max-width: 768px) {
             h1 { font-size: 2.5rem; }
-            .main-card { padding: 40px 25px; }
+            .main-card { padding: 40px 20px; }
             .skills-grid { grid-template-columns: 1fr; }
+            .btn-group { flex-direction: column; width: 100%; }
+            .btn-link { width: 100%; justify-content: center; }
         }
     </style>
 </head>
@@ -200,7 +222,7 @@
 
     <div class="ambient-glow"></div>
 
-    <div class="main-card" id="card">
+    <div class="main-card">
         <div class="header">
             <h1>متعب العتيبي</h1>
             <div class="subtitle">محب للتقنية & باحث</div>
@@ -240,22 +262,21 @@
         </div>
 
         <div class="footer">
-            <a href="https://www.linkedin.com/in/muteb-al-otaibi-9641853bb" target="_blank" class="btn-link">
-                <span>تواصل معي عبر LinkedIn</span>
-                <i class="fas fa-arrow-left"></i>
-            </a>
-            <div class="copyright">© 2026 متعب العتيبي | التميز في بساطة التصميم</div>
+            <div class="btn-group">
+                <a href="https://www.linkedin.com/in/muteb-al-otaibi-9641853bb" target="_blank" class="btn-link btn-linkedin">
+                    <i class="fab fa-linkedin"></i>
+                    <span>تواصل عبر LinkedIn</span>
+                </a>
+                
+                <!-- استبدل رابط # برابط ملف السيرة الذاتية الخاص بك (مثلاً ملف PDF مرفوع على Google Drive) -->
+                <a href="#" target="_blank" class="btn-link btn-cv">
+                    <i class="fas fa-file-pdf"></i>
+                    <span>عرض السيرة الذاتية</span>
+                </a>
+            </div>
+            <div class="copyright">© 2026 متعب العتيبي | الهوية الرقمية الرسمية</div>
         </div>
     </div>
 
-    <script>
-        // Subtle tilt effect
-        const card = document.getElementById('card');
-        document.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.pageX) / 50;
-            const y = (window.innerHeight / 2 - e.pageY) / 50;
-            card.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-        });
-    </script>
 </body>
 </html>
